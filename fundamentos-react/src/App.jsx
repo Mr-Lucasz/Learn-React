@@ -12,8 +12,8 @@ export function App() {
         <Sidebar />
         <div className={styles.postContainer}>
           <Post author="Lucas Rodrigues" />
-          <Post author="Lucas 2" />
-          <Post author="Lucas 2" />
+          <Post author="Lucas Cunha" />
+          <Post author="Lucas Rodrigues" />
         </div>
       </div>
     </div>

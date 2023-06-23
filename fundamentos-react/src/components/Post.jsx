@@ -30,11 +30,11 @@ export function Post(props) {
           👉<a href="#"> jane.design/doctorcare</a>
         </p>
         <p>
-          <a href="#">#novoprojeto </a>
+          <a href="https://github.com/Mr-Lucasz/Learn-React">#novoprojeto </a>
           {""}
-          <a href="">#nlw </a>
+          <a href="https://www.rocketseat.com.br/nlw">#nlw </a>
           {""}
-          <a href="">#rocketseat </a>
+          <a href="https://www.rocketseat.com.br/">#rocketseat </a>
         </p>
       </div>
       <form className={styles.commentForm}>
