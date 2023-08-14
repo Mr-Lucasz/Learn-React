@@ -22,26 +22,22 @@ export function Post(props) {
   );
 
   const [comments, setComments] = useState(["Post Muito Bacana, hein?!"]);
-  const [newComment, setNewComment] = useState('');
+  const [newComment, setNewComment] = useState("");
 
   function eventCreateNewComment() {
     event.preventDefault();
     setComments([...comments, newComment]);
-    setNewComment('');
-
+    setNewComment("");
   }
 
   function handleNewCommentChange() {
     setNewComment(event.target.value);
-
   }
-
 
   const publishedDateRelativeToNow = formatDistanceToNow(props.publishedAt, {
     locale: ptBR,
     addSufix: true,
   });
-
 
   return (
     <article className={styles.post}>
@@ -77,20 +73,32 @@ export function Post(props) {
       </div>
       <form onSubmit={eventCreateNewComment} className={styles.commentForm}>
         <strong>Deixa seu feedback</strong>
-        <textarea name="comment" 
-        placeholder="Comente aqui" 
-        value={newComment}
-        onChange={handleNewCommentChange}
+        <textarea
+          name="comment"
+          placeholder="Comente aqui"
+          value={newComment}
+          onChange={handleNewCommentChange}
         />
         <footer>
           <button type="submit">Publicar</button>
         </footer>
       </form>
       <div className={styles.commentList}>
-        {comments.map((comment) => {
-          return <Comment content={comment} />;
+        {comments.map((comment, index) => {
+          return <Comment key={index} content={comment} />;
         })}
       </div>
     </article>
   );
 }
+//Key no React
+//Toda vez que vc tem um array de elementos que vc vai renderizar na tela, vc precisa passar uma key para cada elemento
+//Quando o estado altera, o React vai renderizar novamente o componente, e ele precisa saber qual elemento ele precisa alterar
+// Quando a propriedade do componente muda, o React renderiza novamente o componente
+//Quando um Componente Pai Renderiza novamente, todos os seus componentes filhos são renderizados novamente
+//São os 3 principais fluxos de renderização do React
+// Isso não pode ser lento? Pode sim!
+// Mas é por isso que usamos a Key, para que o React saiba qual elemento ele precisa alterar
+// Porque não posso usar o Indice do Array como Key?
+// Porque o React não consegue diferenciar um elemento do outro, se eles tiverem o mesmo indice
+// Por isso, é importante que a Key seja única
