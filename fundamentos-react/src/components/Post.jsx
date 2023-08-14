@@ -44,11 +44,9 @@ export function Post(props) {
     //ele vai filtrar todos os comments, e vai retornar todos os comments que forem diferentes do commentToDelete
     //e vai retornar um novo array, que não tem o commentToDelete
     // e o setComments vai alterar o estado do componente, e vai renderizar novamente o componente
-
     setComments(commentsWithoutDeleted);
-
-
   }
+  
 
   const publishedDateRelativeToNow = formatDistanceToNow(props.publishedAt, {
     locale: ptBR,
@@ -106,6 +104,7 @@ export function Post(props) {
               key={index}
               content={comment}
               onDeleteComment={deleteComment}
+
             />
           );
         })}

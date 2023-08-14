@@ -8,6 +8,10 @@ export function Comment(props) {
   function handleDeleteComment() {
     props.onDeleteComment(props.content);
   }
+  function handleLikeComment() {
+    props.onLikeComment(props.content);
+    
+  }
 
 
   return (
@@ -32,7 +36,7 @@ export function Comment(props) {
           <p>{props.content}</p>
         </div>
         <footer>
-          <button>
+          <button >
             <ThumbsUp />
             Aplaudir <span>20</span>
           </button>
