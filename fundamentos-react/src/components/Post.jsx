@@ -34,6 +34,10 @@ export function Post(props) {
     setNewComment(event.target.value);
   }
 
+  function deleteComment() {
+    console.log("Deletando comentário");
+  }
+
   const publishedDateRelativeToNow = formatDistanceToNow(props.publishedAt, {
     locale: ptBR,
     addSufix: true,
@@ -85,7 +89,13 @@ export function Post(props) {
       </form>
       <div className={styles.commentList}>
         {comments.map((comment, index) => {
-          return <Comment key={index} content={comment} />;
+          return (
+            <Comment
+              key={index}
+              content={comment}
+              onDeleteComment={deleteComment}
+            />
+          );
         })}
       </div>
     </article>

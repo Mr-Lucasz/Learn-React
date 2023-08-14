@@ -3,6 +3,15 @@ import styles from "./Comment.module.css";
 import { Avatar } from "./Avatar";
 
 export function Comment(props) {
+
+
+  function handleDeleteComment() {
+    props.onDeleteComment(props.content);
+
+
+  }
+
+
   return (
     <div className={styles.comment}>
       <Avatar hasBorder={false} src="https://github.com/Mr-Lucasz.png" alt="" />
@@ -18,7 +27,7 @@ export function Comment(props) {
                 1h átras
               </time>
             </div>
-            <button type="button" title="Deletar comentário">
+            <button onClick={handleDeleteComment} type="button" title="Deletar comentário">
               <Trash size={24} />
             </button>
           </header>
@@ -34,3 +43,11 @@ export function Comment(props) {
     </div>
   );
 }
+
+//como fazer o botão de deletar funcionar?
+// use Props para passar a função de deletar para o componente pai
+//exemplo:
+// function handleDeleteComment() {
+//   setDeleteComment(true);
+//   props.onDeleteComment();
+//   console.log("Deletando comentário");
