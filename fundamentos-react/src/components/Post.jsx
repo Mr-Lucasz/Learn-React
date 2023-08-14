@@ -3,10 +3,17 @@ import { Comment } from "./Comment";
 import styles from "./Post.module.css";
 import { format, formatDistanceToNow } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
+import { useState } from "react";
 
 // author: {avatar_url: "", name: "", role: ""}
 //publishedAt: date
 //content : string
+
+//estado = var que vc quer que o componente monitore
+//propriedade = var que vc quer que o componente receba
+
+
+
 
 export function Post(props) {
   const publishedDateFormatted = format(
@@ -16,6 +23,20 @@ export function Post(props) {
       locale: ptBR,
     }
   );
+
+ 
+  
+  const [comments, setComments] = useState([1,2])
+
+  function eventCreateNewComment(){
+    event.preventDefault();
+    setComments([...comments, comments.length + 1]);
+
+
+
+  }
+
+
 
   const publishedDateRelativeToNow = formatDistanceToNow(props.publishedAt, {
     locale: ptBR,
@@ -35,7 +56,7 @@ export function Post(props) {
         </div>
         <time
           title={publishedDateFormatted}
-          dateTime={publishedAt.toISOString()}
+          dateTime={props.publishedAt.toISOString()} // Use props.publishedAt aqui
         >
           {publishedDateRelativeToNow}
         </time>
@@ -55,7 +76,7 @@ export function Post(props) {
           }
         })}
       </div>
-      <form className={styles.commentForm}>
+      <form onSubmit={eventCreateNewComment} className={styles.commentForm}>
         <strong>Deixa seu feedback</strong>
         <textarea placeholder="Comente aqui" />
         <footer>
@@ -63,8 +84,11 @@ export function Post(props) {
         </footer>
       </form>
       <div className={styles.commentList}>
-        <Comment />
-        <Comment />
+        {comments.map(comments => {
+          return <Comment />
+        })}
+
+
       </div>
     </article>
   );
