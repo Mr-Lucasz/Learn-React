@@ -7,8 +7,6 @@ export function Comment(props) {
 
   function handleDeleteComment() {
     props.onDeleteComment(props.content);
-
-
   }
 
 

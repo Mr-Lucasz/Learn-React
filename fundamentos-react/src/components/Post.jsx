@@ -34,8 +34,20 @@ export function Post(props) {
     setNewComment(event.target.value);
   }
 
-  function deleteComment() {
-    console.log("Deletando comentário");
+  function deleteComment(commentToDelete) {
+    //imutabilidade
+    //as var não sofrem alterações, vc cria uma nova var com o valor que vc quer
+    const commentsWithoutDeleted = comments.filter(comment => { 
+      return comment !== commentToDelete;
+    })
+    // esse const commentsWithoutDeleted é um novo array, que não tem o commentToDelete
+    //ele vai filtrar todos os comments, e vai retornar todos os comments que forem diferentes do commentToDelete
+    //e vai retornar um novo array, que não tem o commentToDelete
+    // e o setComments vai alterar o estado do componente, e vai renderizar novamente o componente
+
+    setComments(commentsWithoutDeleted);
+
+
   }
 
   const publishedDateRelativeToNow = formatDistanceToNow(props.publishedAt, {
