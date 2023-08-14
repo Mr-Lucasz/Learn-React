@@ -12,9 +12,6 @@ import { useState } from "react";
 //estado = var que vc quer que o componente monitore
 //propriedade = var que vc quer que o componente receba
 
-
-
-
 export function Post(props) {
   const publishedDateFormatted = format(
     props.publishedAt,
@@ -24,18 +21,20 @@ export function Post(props) {
     }
   );
 
- 
-  
-  const [comments, setComments] = useState([1,2])
+  const [comments, setComments] = useState(["Post Muito Bacana, hein?!"]);
+  const [newComment, setNewComment] = useState('');
 
-  function eventCreateNewComment(){
+  function eventCreateNewComment() {
     event.preventDefault();
-    setComments([...comments, comments.length + 1]);
-
-
+    setComments([...comments, newComment]);
+    setNewComment('');
 
   }
 
+  function handleNewCommentChange() {
+    setNewComment(event.target.value);
+
+  }
 
 
   const publishedDateRelativeToNow = formatDistanceToNow(props.publishedAt, {
@@ -43,7 +42,7 @@ export function Post(props) {
     addSufix: true,
   });
 
-  console.log(props);
+
   return (
     <article className={styles.post}>
       <header>
@@ -78,17 +77,19 @@ export function Post(props) {
       </div>
       <form onSubmit={eventCreateNewComment} className={styles.commentForm}>
         <strong>Deixa seu feedback</strong>
-        <textarea placeholder="Comente aqui" />
+        <textarea name="comment" 
+        placeholder="Comente aqui" 
+        value={newComment}
+        onChange={handleNewCommentChange}
+        />
         <footer>
           <button type="submit">Publicar</button>
         </footer>
       </form>
       <div className={styles.commentList}>
-        {comments.map(comments => {
-          return <Comment />
+        {comments.map((comment) => {
+          return <Comment content={comment} />;
         })}
-
-
       </div>
     </article>
   );
