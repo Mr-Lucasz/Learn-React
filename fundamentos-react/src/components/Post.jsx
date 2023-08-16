@@ -23,17 +23,26 @@ export function Post(props) {
 
   const [comments, setComments] = useState(["Post Muito Bacana, hein?!"]);
   const [newComment, setNewComment] = useState("");
+  //essas duas const comments e newComment são estados do componente
+  //eles são variáveis que o componente vai monitorar
+  //e toda vez que o estado do componente alterar, o componente vai renderizar novamente
 
   function eventCreateNewComment() {
     event.preventDefault();
     setComments([...comments, newComment]);
     setNewComment("");
+    //essa function vai ser chamada toda vez que o usuário clicar no botão
+    //e vai alterar o estado do componente
+    // e vai renderizar novamente o componente
   }
-
   function handleNewCommentChange() {
+    event.target.setCustomValidity("");
     setNewComment(event.target.value);
-  }
+    // essa function vai ser chamada toda vez que o usuário digitar algo no input
+    // e vai alterar o estado do componente
+    // e vai renderizar novamente o componente
 
+  }
   function deleteComment(commentToDelete) {
     //imutabilidade
     //as var não sofrem alterações, vc cria uma nova var com o valor que vc quer
@@ -46,7 +55,10 @@ export function Post(props) {
     // e o setComments vai alterar o estado do componente, e vai renderizar novamente o componente
     setComments(commentsWithoutDeleted);
   }
-  
+  function handleNewCommentInvalid() {
+   event.target.setCustomValidity("O comentário não pode ser vazio");
+  }
+  const isNewComnmentEmpty = newComment.length === 0;
 
   const publishedDateRelativeToNow = formatDistanceToNow(props.publishedAt, {
     locale: ptBR,
@@ -85,16 +97,18 @@ export function Post(props) {
           }
         })}
       </div>
-      <form onSubmit={eventCreateNewComment} className={styles.commentForm}>
+      <form onSubmit={eventCreateNewComment}  className={styles.commentForm}>
         <strong>Deixa seu feedback</strong>
         <textarea
           name="comment"
           placeholder="Comente aqui"
           value={newComment}
           onChange={handleNewCommentChange}
+          onInvalid={handleNewCommentInvalid}
+          required={true}
         />
         <footer>
-          <button type="submit">Publicar</button>
+          <button type="submit" disabled={isNewComnmentEmpty } >Publicar</button>
         </footer>
       </form>
       <div className={styles.commentList}>
@@ -104,7 +118,6 @@ export function Post(props) {
               key={index}
               content={comment}
               onDeleteComment={deleteComment}
-
             />
           );
         })}
