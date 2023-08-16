@@ -2,6 +2,7 @@ import { ThumbsUp, Trash } from "phosphor-react";
 import styles from "./Comment.module.css";
 import { Avatar } from "./Avatar";
 import { useState } from "react";
+import { set } from "date-fns";
 
 export function Comment(props) {
 
@@ -14,9 +15,14 @@ export function Comment(props) {
     
   }
   const [countLike, setCountLike] = useState(0);
+
   function handleLikeComment() {
-    setCountLike(countLike + 1);
+    setCountLike((state)=> {
+      return state + 1;
+    });
   }
+//sempre que vc for atualizar uma info e essa info depende do valor anterior
+//vc sempre vai usar essa tipo de função clousure
 
 
   return (
