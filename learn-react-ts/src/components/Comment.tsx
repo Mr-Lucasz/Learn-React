@@ -5,19 +5,24 @@ import { useState } from "react";
 
 
 
+interface CommentProps {
+  content: string;
+  onDeleteComment: (content: string) => void;
+  onLikeComment?: (content: string) => void;
+}
 
-export function Comment(props) {
-
+export function Comment(props: CommentProps) {
 
   function handleDeleteComment() {
     props.onDeleteComment(props.content);
   }
-  function handleLikeComment() {
-    props.onLikeComment(props.content);
-    
-  }
-  const [countLike, setCountLike] = useState(0);
 
+
+  // function handleLikeComment () {
+  //   props.onLikeComment(props.content);
+    
+  // }
+  const [countLike, setCountLike] = useState(0);
   function handleLikeComment() {
     setCountLike((state)=> {
       return state + 1;
@@ -29,7 +34,7 @@ export function Comment(props) {
 
   return (
     <div className={styles.comment}>
-      <Avatar hasBorder={false} src="https://github.com/Mr-Lucasz.png" alt="" />
+      <Avatar hasBorder={false} src="https://github.com/Mr-Lucasz.png" />
       <div className={styles.commentBox}>
         <div className={styles.commentContent}>
           <header>
